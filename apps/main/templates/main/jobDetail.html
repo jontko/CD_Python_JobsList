@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+    <title>Handy Helper 2</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="head">
+            <h3>Hello, {{ user.first }}! These are the job details! </h3>
+            
+                <a href="/handy/dashboard">Dashboard</a>
+            
+            
+                <a href="/handy/logout">Log Out</a>
+            
+        </div>
+
+        <div class="body">
+            <h3>{{ job.title }}</h3><br>
+            <div class="bigbox">
+                <h3>Description:  {{ job.description }}</h3><br>
+                <h3>Location: {{ job.location }}</h3>
+                <h3>Posted by: {{ job.user.first }}</h3>
+                <h3>Posted on: {{ job.created }}</h3><br>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

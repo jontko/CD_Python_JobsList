@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/index.css' %}">
+
+    <title>Handy Helper 2</title>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <div class="upperleft">
+
+                <h3>Hello {{ user.first }}!</h3>
+
+            </div>
+
+            <div class="center">
+                <a href="/handy/logout">Log Out</a>
+            </div>
+            
+            <div class="upperright">
+                <div class="button">
+                    <a href="/handy/jobin">New Job!</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="body">
+            <h4>Everyone's Jobs: </h4>
+            <div class="scrollwindow">
+                    <table>
+                            <thead>
+                                <th>
+                                    <tr>
+                                        <td>Job</td>
+                                        <td>Location</td>
+                                        <td>User</td>
+                                        <td>Actions </td>
+                                    </tr>
+                                </th>
+                            </thead>
+                             <tbody>
+                                 {% for job in all_jobs %}
+                                     <tr>
+                                         <td><a href="/handy/{{ job.id }}"> {{ job.title }}</a></td>
+                                         <td>{{ job.location }} </td>
+                                         <td>{{ job.user.first }}</td>
+                                         <td><a href="/handy/{{ job.id}}"> | View | </a> <a href="/handy/jobin">  | Add| {% if user.id == job.user.id %} </a> <a href="/handy/{{ job.id}}/delete">  | Remove |  </a> <a href="/handy/{{ job.id}}/edit">  | Edit |  </a> {% endif %} </td>
+                                     </tr>
+                                 {% endfor %}
+                                 
+                             </tbody>
+                        </table>
+                     </div>
+                     
+                     <h4>{{ user.first }}'s Jobs: </h4>
+                     <div class="scrollwindow">
+                         <table>
+                             <thead>
+                                 <th>
+                                     <tr>
+                                         <td>Job</td>
+                                         <td>Location</td>
+                                         <td>Actions </td>
+                                        </tr>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    {% for job in jobs %}
+                                    <tr>
+                                        <td><a href="/handy/{{ job.id }}"> {{ job.title}}</a></td>
+                                        <td>{{ job.location }}</td>
+                                        <td> <a href="/handy/{{ job.id }}"> | View | </a> <a href="/handy/{{ job.id}}/delete"> | Done |  </a> </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
+
+
+
+
+{% if user.id == id.uploaded_by.id %}
+        <form action="/url_route" method="POST">
+            {% csrf_token %}
+            <div class="css_class_name">
+                <label for="formGroupExampleInput2" style="font-size: 30pt; font-weight: bold;">Description</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" name="update_desc"
+                    value="{{Description}}">
+            </div>
+            <input type="submit" class="btn btn-primary">
+        </form>
+        {% else %}
+        <!-- <h1>Description: {{ PythonValueReference}}</h1> -->
+        {%endif%}

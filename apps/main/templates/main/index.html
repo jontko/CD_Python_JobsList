@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/index.css' %}">
+
+    <title>Handy Helper 2</title>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h1>Welcome! Sign in to manage your jobs!</h1>
+        </div>
+
+        <div class="body1">
+            <h2>Register</h2>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li style="color:red" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            
+            <form action="/handy/validate" method="POST">
+            {% csrf_token %}
+                    <h3>First Name: <input name="first" type="text"></h3>
+                    <h3>Last Name: <input name="last" type="text"></h3>
+                    <h3>eMail: <input name="email" type="email"></h3><br>
+                    <h3>Password: <input name="pw" type="password"></h3><br>
+                    <h3>Confirm Password: <input name="pw2" type="password"></h3><br>
+ 
+                    <input class="indent" type="submit", value="Register">
+
+            </form>
+        </div>
+
+        <div class="rightside">
+            <h2>Login</h2>
+                <form action="/handy/login" method="post">
+                {% csrf_token %}
+                        <h3>eMail: <input name="email" type="email"></h3><br>
+                        <h3>Password: <input name ="pw" type="password"></h3><br>
+
+                        <input class="indent" type="submit" value="Log In">
+
+                </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
